@@ -1,0 +1,7 @@
+dist
+bundle
+.compswag.js
+swagger.json
+.cache
+.idea
+node_modules

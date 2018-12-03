@@ -1,0 +1,28 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"pretty": false,
+		"module": "commonjs",
+		"target": "esnext",
+		"noImplicitAny": true,
+		"moduleResolution": "node",
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "dist",
+		"baseUrl": ".",
+		"typeRoots": ["node_modules/@types"],
+		"paths": {
+			"*": [
+				"node_modules/*",
+				"src/types/*"
+			]
+		},
+		"types": [
+		],
+		"alwaysStrict": true
+	},
+	"include": [
+		"src/**/*"
+	]
+}

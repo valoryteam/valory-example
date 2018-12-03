@@ -1,0 +1,6 @@
+{
+  "entrypoint": "dist/appserver.js",
+  "isTS": true,
+  "sourceEntrypoint": "src/appserver.ts",
+  "singleError": true
+}

@@ -1,0 +1,25 @@
+{
+	"name": "valory-example",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"build": "valory compile && tsc",
+		"start": "node dist/appserver.js",
+		"clean": "rm -r bundle .cache dist || true",
+		"bundle": "npm run build && parcel build -t node --bundle-node-modules --detailed-report --no-source-maps -d bundle src/appserver.ts"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^8.4.0",
+		"valory-adaptor-polka": "^1.0.2",
+		"valory-runtime": "^3.11.2"
+	},
+	"devDependencies": {
+		"@types/jsonwebtoken": "^8.3.0",
+		"@types/node": "^10.12.10",
+		"parcel-bundler": "^1.10.3",
+		"parcel-plugin-valory": "^1.0.3",
+		"typescript": "^3.2.1",
+		"valory": "^3.11.2"
+	}
+}
