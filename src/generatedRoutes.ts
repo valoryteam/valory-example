@@ -238,7 +238,47 @@ export = {
             });
         },AdvancedControllerControllerstandardResponseMiddleware,true,AdvancedControllerControllerstandardResponsePostMiddleware, false);
         
+        const AdvancedControllerControllerdiscriminatorMiddleware = pushArr((AdvancedControllerController.discriminator as any).middleware, (AdvancedControllerController as any).middleware);
+        const AdvancedControllerControllerdiscriminatorPostMiddleware = pushArr((AdvancedControllerController.discriminator as any).postMiddleware, (AdvancedControllerController as any).postMiddleware);
+        app.post("/advanced/discriminator",{"operationId":"AdvancedControllerDiscriminator","produces":["application/json"],"responses":{"204":{"description":"No content"}},"description":"Discriminators can be fully validated and displayed well in redoc","tags":["Advanced"],"security":[],"parameters":[{"in":"body","name":"input","required":true,"schema":{"$ref":"#/definitions/Vehicle"}}]},(req: ApiRequest, logger: any)=>{
+            
+            AdvancedControllerController.logger = logger;
+            AdvancedControllerController.disableSerializer = false;
+            
+            return Promise.resolve(AdvancedControllerController.discriminator(
+                req.body,
+            )).then((response) => {
+                
+                const fullResponse = app.buildSuccess(response, AdvancedControllerController.getHeaders(), AdvancedControllerController.getStatus(), AdvancedControllerController.disableSerializer);
+                AdvancedControllerController.clearStatus();
+                AdvancedControllerController.clearHeaders();
+                return fullResponse;
+                
+                
+            });
+        },AdvancedControllerControllerdiscriminatorMiddleware,true,AdvancedControllerControllerdiscriminatorPostMiddleware, false);
+        
+        const AdvancedControllerControllerinlineMiddleware = pushArr((AdvancedControllerController.inline as any).middleware, (AdvancedControllerController as any).middleware);
+        const AdvancedControllerControllerinlinePostMiddleware = pushArr((AdvancedControllerController.inline as any).postMiddleware, (AdvancedControllerController as any).postMiddleware);
+        app.get("/advanced/inline",{"operationId":"AdvancedControllerInline","produces":["application/json"],"responses":{"204":{"description":"No content"}},"description":"The middleware decorator can be used to add inline middleware to resources","tags":["Advanced"],"security":[],"parameters":[]},(req: ApiRequest, logger: any)=>{
+            
+            AdvancedControllerController.logger = logger;
+            AdvancedControllerController.disableSerializer = false;
+            
+            return Promise.resolve(AdvancedControllerController.inline(
+                
+            )).then((response) => {
+                
+                const fullResponse = app.buildSuccess(response, AdvancedControllerController.getHeaders(), AdvancedControllerController.getStatus(), AdvancedControllerController.disableSerializer);
+                AdvancedControllerController.clearStatus();
+                AdvancedControllerController.clearHeaders();
+                return fullResponse;
+                
+                
+            });
+        },AdvancedControllerControllerinlineMiddleware,true,AdvancedControllerControllerinlinePostMiddleware, false);
+        
     },
-    definitions: {"Item":{"description":"You can use interfaces as models.\nThis message will show up as a description.","properties":{"someField":{"type":"string","description":"You can also add validations and examples to individual properties","example":"squirtle","maxLength":20,"minLength":10},"optionalField":{"type":"string"},"aNumber":{"type":"number","format":"double"}},"required":["someField","aNumber"],"type":"object"},"DataClass":{"properties":{"name":{"type":"string","default":"Kerim"},"coolness":{"type":"number","format":"double","description":"Normal fields and validation still work","maximum":-1}},"required":["coolness"],"type":"object"},"AliasType":{"type":"string","description":"Description can be added to alias types","example":"potato"},"PrimaryColors":{"enum":["red","blue","yellow"],"type":"string"},"ModelWithEnums":{"properties":{"literal":{"type":"string","enum":["cool","uncool"]},"enum":{"$ref":"#/definitions/PrimaryColors"}},"required":["literal","enum"],"type":"object"},"ApiResobject":{"properties":{"status_code":{"type":"number","format":"double"},"response_data":{"type":"object","properties":{"potato":{"type":"string","enum":["cool"]}},"required":["potato"]}},"required":["status_code","response_data"],"type":"object"}},
+    definitions: {"Item":{"description":"You can use interfaces as models.\nThis message will show up as a description.","properties":{"someField":{"type":"string","description":"You can also add validations and examples to individual properties","example":"squirtle","maxLength":20,"minLength":10},"optionalField":{"type":"string"},"aNumber":{"type":"number","format":"double"}},"required":["someField","aNumber"],"type":"object"},"DataClass":{"properties":{"name":{"type":"string","default":"Kerim"},"coolness":{"type":"number","format":"double","description":"Normal fields and validation still work","maximum":-1}},"required":["coolness"],"type":"object"},"AliasType":{"type":"string","description":"Description can be added to alias types","example":"potato"},"PrimaryColors":{"enum":["red","blue","yellow"],"type":"string"},"ModelWithEnums":{"properties":{"literal":{"type":"string","enum":["cool","uncool"]},"enum":{"$ref":"#/definitions/PrimaryColors"}},"required":["literal","enum"],"type":"object"},"ApiResobject":{"properties":{"status_code":{"type":"number","format":"double"},"response_data":{"type":"object","properties":{"potato":{"type":"string","enum":["cool"]}},"required":["potato"]}},"required":["status_code","response_data"],"type":"object"},"Car":{"properties":{"all_wheel_drive":{"type":"boolean"}},"required":["all_wheel_drive"],"type":"object","allOf":[{"$ref":"#/definitions/Vehicle"}]},"Truck":{"properties":{"wheels":{"type":"string","enum":["4","6"]}},"required":["wheels"],"type":"object","allOf":[{"$ref":"#/definitions/Vehicle"}]},"Unicycle":{"properties":{"color":{"$ref":"#/definitions/PrimaryColors"}},"required":["color"],"type":"object","allOf":[{"$ref":"#/definitions/Vehicle"}]},"Vehicle":{"description":"Discriminated Unions can be used to create versatile polymorphic validations","properties":{"type":{"type":"string"}},"required":["type"],"type":"object","discriminator":"type"}},
     genroutesVersion: 1.1
 }
